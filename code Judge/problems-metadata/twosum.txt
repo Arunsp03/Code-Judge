@@ -1,0 +1,5 @@
+problemname:twosum
+outputtype:number
+parameters:2
+param1type:number
+param2type:number
