@@ -34,20 +34,39 @@ class CodeExecutionFacade {
       let j = 0;
 
       for (let index = 3; index < metaDataParameters.length; index++) {
-        // let paramType = metaDataParameters[index].split(":")[1];
-
-        // if (paramType === "number") {
-        //   inputs[j] = Number(inputs[j]);
-        // }
-        functionArgs.push(inputs[j]);
+        const paramType = metaDataParameters[index].split(":")[1];
+      
+        if (inputs[j] !== undefined) {
+          let arg = inputs[j].trim(); // Trim whitespace
+      
+          if (paramType === "string") {
+           
+            arg = `"${arg.replace(/"/g, '\\"')}"`;
+          } else if (paramType === "number") {
+            arg = Number(arg);
+          }
+      
+          functionArgs.push(arg);
+        }
         j++;
       }
-
+      
+     // console.log("function args",functionArgs);
+      
       // Construct the function call separately
       const functionCall = `${problemName}(${functionArgs.join(", ")})`;
 
+      let printCall;
+      if(language=='python')
+      {
+        printCall='print';
+      }
+      else if(language=='node')
+      {
+        printCall ='console.log'
+      }
       // Full execution code
-      const fullCode = `${sourceCode}\nprint(${functionCall})`;
+      const fullCode = `${sourceCode}\n${printCall}(${functionCall})`;
 
       try {
         const actualOutput = await this._codeExecutor.runSandboxedCode(fullCode, language);

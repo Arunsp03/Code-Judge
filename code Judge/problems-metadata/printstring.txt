@@ -1,0 +1,5 @@
+problemname:printstring
+outputtype:string
+parameters:1
+param1type:string
+

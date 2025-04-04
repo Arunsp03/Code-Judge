@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Languages = void 0;
+exports.returnLanguage = exports.Languages = void 0;
 exports.capitalizeWords = capitalizeWords;
 exports.capitalize = capitalize;
 function capitalizeWords(sentence) {
@@ -17,4 +17,15 @@ function capitalize(str) {
 var Languages;
 (function (Languages) {
     Languages[Languages["python"] = 71] = "python";
+    Languages[Languages["node"] = 93] = "node";
 })(Languages || (exports.Languages = Languages = {}));
+const returnLanguage = (language) => {
+    switch (language) {
+        case 'python':
+            return Languages.python;
+            break;
+        case 'node': return Languages.node;
+        default: return undefined;
+    }
+};
+exports.returnLanguage = returnLanguage;

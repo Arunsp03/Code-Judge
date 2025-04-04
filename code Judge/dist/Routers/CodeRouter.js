@@ -21,19 +21,19 @@ const upload = (0, multer_1.default)({ dest: "./codefiles/" });
 const CodeRouter = (0, express_1.Router)();
 CodeRouter.post('/execute', upload.single("file"), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    console.log("Received request with body:", req.body);
-    console.log("Received file:", req.file);
+    // console.log("Received request with body:", req.body);
+    //console.log("Received file:", req.file);    
     const { filename } = req.file;
-    console.log("filename ", filename);
+    //console.log("filename ",filename);
     const filePath = (_a = req.file) === null || _a === void 0 ? void 0 : _a.path;
     const newFileName = `solution_${Date.now()}.py`;
     const newFilePath = path_1.default.join("./codefiles", newFileName);
     if (!req.file) {
-        console.log("No file found");
+        // console.log("No file found");
         return res.status(400).send("No file uploaded");
     }
     const { problemName, language } = req.body;
-    console.log("language ", language);
+    //console.log("language ",language);
     try {
         FileService_1.default.rename(filePath !== null && filePath !== void 0 ? filePath : "", newFilePath);
         yield CodeExecutionFacade_1.default.run(problemName, newFileName, language);

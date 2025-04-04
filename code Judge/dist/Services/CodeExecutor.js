@@ -34,7 +34,7 @@ class CodeExecutor {
                     },
                     params: { base64_encoded: "false", fields: "*" }
                 });
-                return response.data.token; // Returns submission token
+                return response.data.token;
             }
             catch (error) {
                 console.error("Error submitting code:", error);
@@ -58,13 +58,18 @@ class CodeExecutor {
         });
         // runSandboxedCode(sourceCode:string,language:string):string
         // {
-        //   //console.log("source code",sourceCode);
+        //   const languageCode=returnLanguage(language);
+        //   console.log("source code",sourceCode);
+        //   console.log("language",language);
+        //   console.log("language code ",languageCode);
         //   return "hi";
         // }
     }
     runSandboxedCode(sourceCode, language) {
         return __awaiter(this, void 0, void 0, function* () {
-            const token = yield this.submitCode(sourceCode, commonUtils_1.Languages.python); // Submit code and get token
+            //console.log("source code",sourceCode);
+            const languageCode = Number((0, commonUtils_1.returnLanguage)(language));
+            const token = yield this.submitCode(sourceCode, languageCode); // Submit code and get token
             if (!token)
                 throw new Error("Failed to submit code");
             return new Promise((resolve, reject) => {

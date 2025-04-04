@@ -1,6 +1,6 @@
 import { configDotenv } from "dotenv";
 import { Languages } from "../Utils/commonUtils";
-
+import { returnLanguage } from "../Utils/commonUtils";
 import axios from "axios";
 configDotenv();
 
@@ -27,7 +27,7 @@ class CodeExecutor{
       }
     );
 
-    return response.data.token; // Returns submission token
+    return response.data.token; 
   } catch (error) {
     console.error("Error submitting code:", error);
   }
@@ -50,8 +50,10 @@ class CodeExecutor{
   }
 };
 async runSandboxedCode(sourceCode: string,language:string): Promise<string> {
+  //console.log("source code",sourceCode);
   
-  const token = await this.submitCode(sourceCode,Languages.python); // Submit code and get token
+  const languageCode=Number(returnLanguage(language));
+  const token = await this.submitCode(sourceCode,languageCode); // Submit code and get token
   if (!token) throw new Error("Failed to submit code");
 
   return new Promise((resolve, reject) => {
@@ -77,10 +79,19 @@ async runSandboxedCode(sourceCode: string,language:string): Promise<string> {
 
 // runSandboxedCode(sourceCode:string,language:string):string
 // {
-//   //console.log("source code",sourceCode);
+//   const languageCode=returnLanguage(language);
+//   console.log("source code",sourceCode);
+//   console.log("language",language);
+//   console.log("language code ",languageCode);
+  
 //   return "hi";
   
 // }
+
+
+
 }
+
+
 
 export default new CodeExecutor();

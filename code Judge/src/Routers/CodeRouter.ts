@@ -9,21 +9,21 @@ const upload = multer({ dest:  "./codefiles/"},
 const CodeRouter=Router();
 
 CodeRouter.post('/execute', upload.single("file"),async (req, res) => {
-   console.log("Received request with body:", req.body);
-  console.log("Received file:", req.file);    
+  // console.log("Received request with body:", req.body);
+  //console.log("Received file:", req.file);    
   const{filename}=req.file;
-  console.log("filename ",filename);
+  //console.log("filename ",filename);
   const filePath=req.file?.path;
   const newFileName = `solution_${Date.now()}.py`; 
   const newFilePath = path.join("./codefiles", newFileName);
   
   if (!req.file) {
-      console.log("No file found");
+     // console.log("No file found");
       return res.status(400).send("No file uploaded");
   }
 
   const { problemName,language } = req.body;
-  console.log("language ",language);
+  //console.log("language ",language);
   
 
   try {

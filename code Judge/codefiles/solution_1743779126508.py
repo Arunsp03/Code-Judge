@@ -1,0 +1,4 @@
+PrintString(str)
+{
+    return str;
+}
