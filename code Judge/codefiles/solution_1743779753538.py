@@ -1,4 +1,0 @@
-PrintString(str)
-{
-    return str;
-}

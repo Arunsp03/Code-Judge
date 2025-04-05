@@ -19,6 +19,7 @@ class CodeExecutionFacade {
     constructor() {
         this.run = (problemName, fileName, language) => __awaiter(this, void 0, void 0, function* () {
             var _a, _b, _c, _d;
+            let result = [];
             const metaData = yield this._fileService.readProblemMetaData(problemName);
             const inputFiles = (_a = (yield this._fileService.findInputfiles(problemName))) !== null && _a !== void 0 ? _a : [];
             const outputFiles = (_b = (yield this._fileService.findOutputfiles(problemName))) !== null && _b !== void 0 ? _b : [];
@@ -66,15 +67,19 @@ class CodeExecutionFacade {
                     console.log("Expected Output:", expectedOutput);
                     if (actualOutput.trim() === (expectedOutput === null || expectedOutput === void 0 ? void 0 : expectedOutput.trim())) {
                         console.log("Test Case: ✅ Passed\n");
+                        result.push("AC");
                     }
                     else {
                         console.log("Test Case: ❌ Failed\n");
+                        result.push("WA");
                     }
                 }
                 catch (error) {
+                    result.push("WA");
                     console.error("Execution error:", error);
                 }
             }
+            return result;
         });
         this._codeExecutor = CodeExecutor_1.default;
         this._fileService = FileService_1.default;

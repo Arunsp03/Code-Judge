@@ -28,8 +28,8 @@ CodeRouter.post('/execute', upload.single("file"),async (req, res) => {
 
   try {
       FileService.rename(filePath??"", newFilePath);
-      await CodeExecutionFacade.run(problemName, newFileName,language);
-      res.send("Executing");
+      const result=await CodeExecutionFacade.run(problemName, newFileName,language);
+      res.json({"result":result});
   } catch (error) {
       console.error("Error saving file:", error);
       res.status(500).send("Error saving file");

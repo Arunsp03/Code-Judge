@@ -4,7 +4,7 @@ class FileService {
   findInputfiles = async (problemName: string) => {
     try {
       problemName = problemName.replace(" ", "");
-      const inputFiles = await fs.readdir(`./tests/${problemName}/inputs`);
+      const inputFiles = await fs.readdir(`../problems/tests/${problemName}/inputs`);
 
       return inputFiles;
     } catch (err) {
@@ -15,7 +15,7 @@ class FileService {
   findOutputfiles = async (problemName: string) => {
     try {
       problemName = problemName.replace(" ", "");
-      const outputFiles = await fs.readdir(`./tests/${problemName}/outputs`);
+      const outputFiles = await fs.readdir(`../problems/tests/${problemName}/outputs`);
 
       return outputFiles;
     } catch (err) {
@@ -27,7 +27,7 @@ class FileService {
       problemName = problemName.replace(" ", "");
 
       const data = await fs.readFile(
-        `./tests/${problemName}/inputs/${fileName}`,
+        `../problems/tests/${problemName}/inputs/${fileName}`,
         "utf8"
       );
 
@@ -41,7 +41,7 @@ class FileService {
     try {
       problemName = problemName.replace(" ", "");
       const data = await fs.readFile(
-        `./problems-metadata/${problemName}.txt`,
+        `../problems/problems-metadata/${problemName}.txt`,
         "utf-8"
       );
 
@@ -55,7 +55,7 @@ class FileService {
     try {
       problemName = problemName.replace(" ", "");
       const data = await fs.readFile(
-        `./tests/${problemName}/outputs/${fileName}`,
+        `../problems/tests/${problemName}/outputs/${fileName}`,
         "utf-8"
       );
       return data;

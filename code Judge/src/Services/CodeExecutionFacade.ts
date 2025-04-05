@@ -11,7 +11,8 @@ class CodeExecutionFacade {
     this._fileService = FileService;
   }
 
-  run = async (problemName: string, fileName: string,language:string) => {
+  run = async (problemName: string, fileName: string,language:string)=> {
+    let result:string[]=[];
     const metaData = await this._fileService.readProblemMetaData(problemName);
     const inputFiles = (await this._fileService.findInputfiles(problemName)) ?? [];
     const outputFiles = (await this._fileService.findOutputfiles(problemName)) ?? [];
@@ -76,14 +77,19 @@ class CodeExecutionFacade {
       
         if (actualOutput.trim() === expectedOutput?.trim()) {
           console.log("Test Case: ✅ Passed\n");
+          result.push("AC");
         } else {
           console.log("Test Case: ❌ Failed\n");
+          result.push("WA");
         }
       } catch (error) {
+        result.push("WA");
         console.error("Execution error:", error);
       }
     }
+    return result;
   };
+
 }
 
 export default new CodeExecutionFacade();

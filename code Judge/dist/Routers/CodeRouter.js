@@ -36,8 +36,8 @@ CodeRouter.post('/execute', upload.single("file"), (req, res) => __awaiter(void 
     //console.log("language ",language);
     try {
         FileService_1.default.rename(filePath !== null && filePath !== void 0 ? filePath : "", newFilePath);
-        yield CodeExecutionFacade_1.default.run(problemName, newFileName, language);
-        res.send("Executing");
+        const result = yield CodeExecutionFacade_1.default.run(problemName, newFileName, language);
+        res.json({ "result": result });
     }
     catch (error) {
         console.error("Error saving file:", error);

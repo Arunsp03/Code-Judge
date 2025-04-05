@@ -15,7 +15,7 @@ class FileService {
         this.findInputfiles = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const inputFiles = yield fs_1.promises.readdir(`./tests/${problemName}/inputs`);
+                const inputFiles = yield fs_1.promises.readdir(`../problems/tests/${problemName}/inputs`);
                 return inputFiles;
             }
             catch (err) {
@@ -26,7 +26,7 @@ class FileService {
         this.findOutputfiles = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const outputFiles = yield fs_1.promises.readdir(`./tests/${problemName}/outputs`);
+                const outputFiles = yield fs_1.promises.readdir(`../problems/tests/${problemName}/outputs`);
                 return outputFiles;
             }
             catch (err) {
@@ -36,7 +36,7 @@ class FileService {
         this.readProblemTestInputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`./tests/${problemName}/inputs/${fileName}`, "utf8");
+                const data = yield fs_1.promises.readFile(`../problems/tests/${problemName}/inputs/${fileName}`, "utf8");
                 return data;
             }
             catch (err) {
@@ -46,7 +46,7 @@ class FileService {
         this.readProblemMetaData = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`./problems-metadata/${problemName}.txt`, "utf-8");
+                const data = yield fs_1.promises.readFile(`../problems/problems-metadata/${problemName}.txt`, "utf-8");
                 return data;
             }
             catch (err) {
@@ -56,7 +56,7 @@ class FileService {
         this.readProblemTestOutputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`./tests/${problemName}/outputs/${fileName}`, "utf-8");
+                const data = yield fs_1.promises.readFile(`../problems/tests/${problemName}/outputs/${fileName}`, "utf-8");
                 return data;
             }
             catch (err) {
