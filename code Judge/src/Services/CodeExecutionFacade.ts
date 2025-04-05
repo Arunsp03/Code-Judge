@@ -12,6 +12,7 @@ class CodeExecutionFacade {
   }
 
   run = async (problemName: string, fileName: string,language:string)=> {
+   
     let result:string[]=[];
     const metaData = await this._fileService.readProblemMetaData(problemName);
     const inputFiles = (await this._fileService.findInputfiles(problemName)) ?? [];
@@ -19,7 +20,7 @@ class CodeExecutionFacade {
     const sourceCode = await this._fileService.getSourceCode(fileName);
 
     // Capitalize problem name
-    problemName = capitalizeWords(problemName).replace(" ", "");
+    
 
     for (let fileIndex = 0; fileIndex < inputFiles.length; fileIndex++) {
       const testInputs = await this._fileService.readProblemTestInputs(problemName, inputFiles[fileIndex]);
@@ -55,7 +56,7 @@ class CodeExecutionFacade {
      // console.log("function args",functionArgs);
       
       // Construct the function call separately
-      const functionCall = `${problemName}(${functionArgs.join(", ")})`;
+      const functionCall = `${capitalizeWords(problemName.replace("-",' ')).replace(" ",'')}(${functionArgs.join(", ")})`;
 
       let printCall;
       if(language=='python')

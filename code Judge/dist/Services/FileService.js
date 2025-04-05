@@ -72,6 +72,16 @@ class FileService {
                 console.error(err);
             }
         });
+        this.getProblemDescription = (problemName) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                const data = yield fs_1.promises.readFile(`../problems/problems-structure/${problemName}.md`, "utf-8");
+                console.log("data", data);
+                return data;
+            }
+            catch (err) {
+                console.error(err);
+            }
+        });
     }
     rename(oldFilePath, newFilePath) {
         return __awaiter(this, void 0, void 0, function* () {

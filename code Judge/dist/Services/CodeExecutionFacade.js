@@ -25,7 +25,6 @@ class CodeExecutionFacade {
             const outputFiles = (_b = (yield this._fileService.findOutputfiles(problemName))) !== null && _b !== void 0 ? _b : [];
             const sourceCode = yield this._fileService.getSourceCode(fileName);
             // Capitalize problem name
-            problemName = (0, commonUtils_1.capitalizeWords)(problemName).replace(" ", "");
             for (let fileIndex = 0; fileIndex < inputFiles.length; fileIndex++) {
                 const testInputs = yield this._fileService.readProblemTestInputs(problemName, inputFiles[fileIndex]);
                 const testOutputs = yield this._fileService.readProblemTestOutputs(problemName, outputFiles[fileIndex]);
@@ -51,7 +50,7 @@ class CodeExecutionFacade {
                 }
                 // console.log("function args",functionArgs);
                 // Construct the function call separately
-                const functionCall = `${problemName}(${functionArgs.join(", ")})`;
+                const functionCall = `${(0, commonUtils_1.capitalizeWords)(problemName.replace("-", ' ')).replace(" ", '')}(${functionArgs.join(", ")})`;
                 let printCall;
                 if (language == 'python') {
                     printCall = 'print';

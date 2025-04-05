@@ -82,6 +82,23 @@ class FileService {
 
   }
 }
+getProblemDescription=async(problemName:string)=>{
+  try{
+   
+    
+    const data = await fs.readFile(
+      `../problems/problems-structure/${problemName}.md`,
+      "utf-8"
+    );
+    console.log("data",data);
+    
+    return data;
+  }
+  catch(err)
+  {
+    console.error(err)
 
+  }
+}
 }
 export default new FileService();
