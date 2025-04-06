@@ -33,3 +33,7 @@ This project was built to understand the core logic behind coding platforms:
 - **Backend**: [Express.js](https://expressjs.com/)  
 - **Execution Engine**: [Judge0 API](https://judge0.com/)  
 - **Languages Supported**: Python, JavaScript  
+
+## TODO
+
+- Add the docker compose file
