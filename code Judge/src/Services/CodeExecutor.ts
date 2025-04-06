@@ -7,7 +7,7 @@ configDotenv();
 class CodeExecutor{
   private readonly JUDGE0_API_URL = "https://judge0-ce.p.rapidapi.com";
   private readonly RAPIDAPI_KEY = process.env.JUDGE0_API_KEY; 
-// Function to submit code
+
  submitCode = async (sourceCode: string, languageId: number) => {
   try {
     const response = await axios.post(
@@ -33,7 +33,7 @@ class CodeExecutor{
   }
 };
 
-// Function to fetch execution results
+
  getExecutionResult = async (token: string) => {
   try {
     const response = await axios.get(`${this.JUDGE0_API_URL}/submissions/${token}`, {
@@ -50,6 +50,7 @@ class CodeExecutor{
   }
 };
 async runSandboxedCode(sourceCode: string,language:string): Promise<string> {
+  
   //console.log("source code",sourceCode);
   
   const languageCode=Number(returnLanguage(language));

@@ -1,7 +1,14 @@
 [
   {
     "id":1,
-    "title": "two sum",
-    "problemId":"two-sum"
+    "title": "Two Sum",
+    "problemId":"two-sum",
+    "difficulty":"Easy"
+  },
+  {
+   "id":2,
+    "title": "Print String",
+    "problemId":"print-string" ,
+    "difficulty":"Easy"
   }
 ]

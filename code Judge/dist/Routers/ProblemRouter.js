@@ -16,9 +16,36 @@ exports.ProblemRouter = void 0;
 const express_1 = require("express");
 const FileService_1 = __importDefault(require("../Services/FileService"));
 exports.ProblemRouter = (0, express_1.Router)();
-exports.ProblemRouter.post('/getProblemData', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { problemName } = req.body;
-    console.log("problemname ", problemName);
-    const data = yield FileService_1.default.getProblemDescription(problemName);
-    return res.json({ data: data });
+exports.ProblemRouter.post("/getProblemData", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { problemName } = req.body;
+        //console.log("problemname ", problemName);
+        if (!problemName || problemName.trim() == 0) {
+            return res.status(404).send("Missing params");
+        }
+        const data = yield FileService_1.default.getProblemDescription(problemName);
+        return res.json({ data: data });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Error while getting problem description");
+    }
+}));
+exports.ProblemRouter.post("/getBoilerplateCode", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { problemName, language } = req.body;
+        if (!problemName ||
+            !language ||
+            problemName.trim() == 0 ||
+            language.trim() == 0) {
+            return res.status(404).send("Missing params");
+        }
+        //console.log("problemname ",problemName);
+        const data = yield FileService_1.default.getBoilerPlateCode(problemName, language);
+        return res.json({ data: data });
+    }
+    catch (err) {
+        console.error(err);
+        res.status(500).send("Error while getting boiler plate code");
+    }
 }));

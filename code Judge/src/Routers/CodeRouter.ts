@@ -4,39 +4,33 @@ import path from "path";
 import multer from "multer";
 import CodeExecutionFacade from "../Services/CodeExecutionFacade";
 
-const upload = multer({ dest:  "./codefiles/"},
-  
-);
-const CodeRouter=Router();
+const upload = multer({ dest: "./codefiles/" });
+const CodeRouter = Router();
 
-CodeRouter.post('/execute', upload.single("file"),async (req, res) => {
-  // console.log("Received request with body:", req.body);
-  //console.log("Received file:", req.file);    
-  const{filename}=req.file;
-  //console.log("filename ",filename);
-  const filePath=req.file?.path;
-  const newFileName = `solution_${Date.now()}.py`; 
-  const newFilePath = path.join("./codefiles", newFileName);
-  
-  if (!req.file) {
-     // console.log("No file found");
-      return res.status(400).send("No file uploaded");
-  }
-
-  const { problemName,language } = req.body;
+CodeRouter.post("/execute", upload.single("file"), async (req, res) => {
+  const { problemName, language, sourceCode } = req.body;
   //console.log("language ",language);
-  
-
+  if (
+    !problemName ||
+    !language ||
+    !sourceCode ||
+    problemName.trim() == 0 ||
+    language.trim() == 0 ||
+    sourceCode.trim() == 0
+  ) {
+    return res.status(404).send("missing parameters");
+  }
   try {
-      FileService.rename(filePath??"", newFilePath);
-      const result=await CodeExecutionFacade.run(problemName, newFileName,language);
-      res.json({"result":result});
+    const result = await CodeExecutionFacade.run(
+      problemName,
+      language,
+      sourceCode
+    );
+    res.json({ result: result });
   } catch (error) {
-      console.error("Error saving file:", error);
-      res.status(500).send("Error saving file");
+    console.error("Error saving file:", error);
+    res.status(500).send("Error saving file");
   }
 });
 
-
-
-export default CodeRouter
+export default CodeRouter;

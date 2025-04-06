@@ -1,25 +1,34 @@
-# Two Sum
+## Two sum
 
-Given two integers, return their sum.
+Find the sum of two given elements. Both the numbers will always be 0 or postiive.
 
-### Example 1
+#### Test case 1
 
-**Input:**  
-num1 = 3  
-num2 = 4
 
-**Output:**  
-7
+Input
 
-### Example 2
+```
+1, 2
 
-**Input:**  
-num1 = -2  
-num2 = 10
+```
 
-**Output:**  
-8
+Output
 
-### Constraints
+```
+3
+```
 
-- -1000 ≤ num1, num2 ≤ 1000
+#### Test case 2
+
+
+Input
+
+```
+1, 100
+```
+
+Output
+
+```
+100
+```

@@ -1,5 +1,6 @@
 import { promises as fs } from "fs";
 import { stripTypeScriptTypes } from "module";
+import { returnExtension } from "../Utils/commonUtils";
 class FileService {
   findInputfiles = async (problemName: string) => {
     try {
@@ -8,7 +9,7 @@ class FileService {
 
       return inputFiles;
     } catch (err) {
-      console.log("error ", err);
+      console.error("error ", err);
     }
   };
   //gets count of no of output files to be compared
@@ -19,7 +20,7 @@ class FileService {
 
       return outputFiles;
     } catch (err) {
-      console.log("error ", err);
+      console.error("error ", err);
     }
   };
   readProblemTestInputs = async (problemName: string, fileName: string) => {
@@ -47,7 +48,7 @@ class FileService {
 
       return data;
     } catch (err) {
-      console.log("error ", err);
+      console.error("error ", err);
     }
   };
 
@@ -60,7 +61,7 @@ class FileService {
       );
       return data;
     } catch (err) {
-      console.log("error ", err);
+      console.error("error ", err);
     }
   };
   async rename(oldFilePath: string, newFilePath: string) {
@@ -100,5 +101,27 @@ getProblemDescription=async(problemName:string)=>{
 
   }
 }
+
+getBoilerPlateCode=async(problemName:string,language:string)=>
+{
+  try{
+  //  console.log("language ",language);
+    
+      const extension=returnExtension(language);
+    const data = await fs.readFile(
+      `../problems/problems-boilerplate/${problemName}.${extension}`,
+      "utf-8"
+    );
+   // console.log("data",data);
+    
+    return data;
+  }
+  catch(err)
+  {
+    console.error("error ",err);
+    
+  }
+}
+
 }
 export default new FileService();

@@ -20,7 +20,6 @@ class CodeExecutor {
     constructor() {
         this.JUDGE0_API_URL = "https://judge0-ce.p.rapidapi.com";
         this.RAPIDAPI_KEY = process.env.JUDGE0_API_KEY;
-        // Function to submit code
         this.submitCode = (sourceCode, languageId) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const response = yield axios_1.default.post(`${this.JUDGE0_API_URL}/submissions`, {
@@ -40,7 +39,6 @@ class CodeExecutor {
                 console.error("Error submitting code:", error);
             }
         });
-        // Function to fetch execution results
         this.getExecutionResult = (token) => __awaiter(this, void 0, void 0, function* () {
             try {
                 const response = yield axios_1.default.get(`${this.JUDGE0_API_URL}/submissions/${token}`, {

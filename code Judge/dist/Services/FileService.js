@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const fs_1 = require("fs");
+const commonUtils_1 = require("../Utils/commonUtils");
 class FileService {
     constructor() {
         this.findInputfiles = (problemName) => __awaiter(this, void 0, void 0, function* () {
@@ -19,7 +20,7 @@ class FileService {
                 return inputFiles;
             }
             catch (err) {
-                console.log("error ", err);
+                console.error("error ", err);
             }
         });
         //gets count of no of output files to be compared
@@ -30,7 +31,7 @@ class FileService {
                 return outputFiles;
             }
             catch (err) {
-                console.log("error ", err);
+                console.error("error ", err);
             }
         });
         this.readProblemTestInputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
@@ -50,7 +51,7 @@ class FileService {
                 return data;
             }
             catch (err) {
-                console.log("error ", err);
+                console.error("error ", err);
             }
         });
         this.readProblemTestOutputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
@@ -60,7 +61,7 @@ class FileService {
                 return data;
             }
             catch (err) {
-                console.log("error ", err);
+                console.error("error ", err);
             }
         });
         this.getSourceCode = (fileName) => __awaiter(this, void 0, void 0, function* () {
@@ -80,6 +81,18 @@ class FileService {
             }
             catch (err) {
                 console.error(err);
+            }
+        });
+        this.getBoilerPlateCode = (problemName, language) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                //  console.log("language ",language);
+                const extension = (0, commonUtils_1.returnExtension)(language);
+                const data = yield fs_1.promises.readFile(`../problems/problems-boilerplate/${problemName}.${extension}`, "utf-8");
+                // console.log("data",data);
+                return data;
+            }
+            catch (err) {
+                console.error("error ", err);
             }
         });
     }
