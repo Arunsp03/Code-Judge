@@ -65,30 +65,35 @@ class CodeExecutor {
     }
     runSandboxedCode(sourceCode, language) {
         return __awaiter(this, void 0, void 0, function* () {
-            //console.log("source code",sourceCode);
-            const languageCode = Number((0, commonUtils_1.returnLanguage)(language));
-            const token = yield this.submitCode(sourceCode, languageCode); // Submit code and get token
-            if (!token)
-                throw new Error("Failed to submit code");
-            return new Promise((resolve, reject) => {
-                setTimeout(() => __awaiter(this, void 0, void 0, function* () {
-                    try {
-                        const result = yield this.getExecutionResult(token);
-                        if (result.stdout) {
-                            resolve(result.stdout.trim().replace("None", ""));
+            try {
+                //console.log("source code",sourceCode);
+                const languageCode = Number((0, commonUtils_1.returnLanguage)(language));
+                const token = yield this.submitCode(sourceCode, languageCode); // Submit code and get token
+                if (!token)
+                    throw new Error("Failed to submit code");
+                return new Promise((resolve, reject) => {
+                    setTimeout(() => __awaiter(this, void 0, void 0, function* () {
+                        try {
+                            const result = yield this.getExecutionResult(token);
+                            if (result.stdout) {
+                                resolve(result.stdout.trim().replace("None", ""));
+                            }
+                            else if (result.stderr) {
+                                reject(new Error(`Execution Error: ${result.stderr}`));
+                            }
+                            else {
+                                reject(new Error("Unknown execution error"));
+                            }
                         }
-                        else if (result.stderr) {
-                            reject(new Error(`Execution Error: ${result.stderr}`));
+                        catch (error) {
+                            reject(error);
                         }
-                        else {
-                            reject(new Error("Unknown execution error"));
-                        }
-                    }
-                    catch (error) {
-                        reject(error);
-                    }
-                }), 3000);
-            });
+                    }), 3000);
+                });
+            }
+            catch (err) {
+                console.error(err);
+            }
         });
     }
 }

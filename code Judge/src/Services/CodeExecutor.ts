@@ -50,7 +50,7 @@ class CodeExecutor{
   }
 };
 async runSandboxedCode(sourceCode: string,language:string): Promise<string> {
-  
+  try{
   //console.log("source code",sourceCode);
   
   const languageCode=Number(returnLanguage(language));
@@ -73,6 +73,11 @@ async runSandboxedCode(sourceCode: string,language:string): Promise<string> {
       }
     }, 3000); 
   });
+}
+catch(err)
+{
+  console.error(err);
+}
 }
 
 
