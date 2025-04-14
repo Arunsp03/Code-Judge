@@ -2,7 +2,7 @@ version: '3.8'
 services:
   frontend:
     build:
-      context: ./codejudge-frontend
+      context: ./app-frontend
     ports:
       - "8080:8080"  
     volumes:
@@ -12,11 +12,12 @@ services:
     
   backend:
     build:
-      context: ./codejudge-backend
+      context: ./code Judge 
     ports:
       - "3000:3000"  
     volumes:
-      - ./problems:/app/problems  
+      - ./problems:/app/problems
+      - ./code Judge/.env:/app/.env   
     environment:
       - NODE_ENV=production  
     depends_on:
