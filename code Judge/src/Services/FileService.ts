@@ -5,7 +5,7 @@ class FileService {
   findInputfiles = async (problemName: string) => {
     try {
       problemName = problemName.replace(" ", "");
-      const inputFiles = await fs.readdir(`../problems/tests/${problemName}/inputs`);
+      const inputFiles = await fs.readdir(`/app/problems/tests/${problemName}/inputs`);
 
       return inputFiles;
     } catch (err) {
@@ -16,7 +16,7 @@ class FileService {
   findOutputfiles = async (problemName: string) => {
     try {
       problemName = problemName.replace(" ", "");
-      const outputFiles = await fs.readdir(`../problems/tests/${problemName}/outputs`);
+      const outputFiles = await fs.readdir(`/app/problems/tests/${problemName}/outputs`);
 
       return outputFiles;
     } catch (err) {
@@ -28,7 +28,7 @@ class FileService {
       problemName = problemName.replace(" ", "");
 
       const data = await fs.readFile(
-        `../problems/tests/${problemName}/inputs/${fileName}`,
+        `/app/problems/tests/${problemName}/inputs/${fileName}`,
         "utf8"
       );
 
@@ -42,7 +42,7 @@ class FileService {
     try {
       problemName = problemName.replace(" ", "");
       const data = await fs.readFile(
-        `../problems/problems-metadata/${problemName}.txt`,
+        `/app/problems/problems-metadata/${problemName}.txt`,
         "utf-8"
       );
 
@@ -56,7 +56,7 @@ class FileService {
     try {
       problemName = problemName.replace(" ", "");
       const data = await fs.readFile(
-        `../problems/tests/${problemName}/outputs/${fileName}`,
+        `/app/problems/tests/${problemName}/outputs/${fileName}`,
         "utf-8"
       );
       return data;
@@ -74,7 +74,7 @@ class FileService {
 }
  getSourceCode=async(fileName:string)=>{
   try{
-    const sourceCode=await fs.readFile(`./codefiles/${fileName}`)
+    const sourceCode=await fs.readFile(`/app/codefiles/${fileName}`)
     return sourceCode.toString();
   }
   catch(err)
@@ -88,7 +88,7 @@ getProblemDescription=async(problemName:string)=>{
    
     
     const data = await fs.readFile(
-      `../problems/problems-structure/${problemName}.md`,
+      `/app/problems/problems-structure/${problemName}.md`,
       "utf-8"
     );
     console.log("data",data);
@@ -109,7 +109,7 @@ getBoilerPlateCode=async(problemName:string,language:string)=>
     
       const extension=returnExtension(language);
     const data = await fs.readFile(
-      `../problems/problems-boilerplate/${problemName}.${extension}`,
+      `/app/problems/problems-boilerplate/${problemName}.${extension}`,
       "utf-8"
     );
    // console.log("data",data);

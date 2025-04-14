@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  frontend:
+    build:
+      context: ./codejudge-frontend
+    ports:
+      - "8080:8080"  
+    volumes:
+      - ./problems:/app/problems  
+    environment:
+      - NODE_ENV=production  
+    
+  backend:
+    build:
+      context: ./codejudge-backend
+    ports:
+      - "3000:3000"  
+    volumes:
+      - ./problems:/app/problems  
+    environment:
+      - NODE_ENV=production  
+    depends_on:
+      - frontend

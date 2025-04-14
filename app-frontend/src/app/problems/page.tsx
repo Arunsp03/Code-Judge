@@ -19,7 +19,7 @@ export default function Problems() {
     return (
         <div className="max-w-4xl mx-auto p-6">
             <h1 className="text-3xl font-bold text-gray-900 mb-6">Available Problems</h1>
-            {problems && problems.map((item) => (
+            {problems && problems.map((item:any) => (
                 <Problem key={item.id} problem={item} />
             ))}
         </div>

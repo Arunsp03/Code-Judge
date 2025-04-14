@@ -16,7 +16,7 @@ class FileService {
         this.findInputfiles = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const inputFiles = yield fs_1.promises.readdir(`../problems/tests/${problemName}/inputs`);
+                const inputFiles = yield fs_1.promises.readdir(`/app/problems/tests/${problemName}/inputs`);
                 return inputFiles;
             }
             catch (err) {
@@ -27,7 +27,7 @@ class FileService {
         this.findOutputfiles = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const outputFiles = yield fs_1.promises.readdir(`../problems/tests/${problemName}/outputs`);
+                const outputFiles = yield fs_1.promises.readdir(`/app/problems/tests/${problemName}/outputs`);
                 return outputFiles;
             }
             catch (err) {
@@ -37,7 +37,7 @@ class FileService {
         this.readProblemTestInputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`../problems/tests/${problemName}/inputs/${fileName}`, "utf8");
+                const data = yield fs_1.promises.readFile(`/app/problems/tests/${problemName}/inputs/${fileName}`, "utf8");
                 return data;
             }
             catch (err) {
@@ -47,7 +47,7 @@ class FileService {
         this.readProblemMetaData = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`../problems/problems-metadata/${problemName}.txt`, "utf-8");
+                const data = yield fs_1.promises.readFile(`/app/problems/problems-metadata/${problemName}.txt`, "utf-8");
                 return data;
             }
             catch (err) {
@@ -57,7 +57,7 @@ class FileService {
         this.readProblemTestOutputs = (problemName, fileName) => __awaiter(this, void 0, void 0, function* () {
             try {
                 problemName = problemName.replace(" ", "");
-                const data = yield fs_1.promises.readFile(`../problems/tests/${problemName}/outputs/${fileName}`, "utf-8");
+                const data = yield fs_1.promises.readFile(`/app/problems/tests/${problemName}/outputs/${fileName}`, "utf-8");
                 return data;
             }
             catch (err) {
@@ -66,7 +66,7 @@ class FileService {
         });
         this.getSourceCode = (fileName) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const sourceCode = yield fs_1.promises.readFile(`./codefiles/${fileName}`);
+                const sourceCode = yield fs_1.promises.readFile(`/app/codefiles/${fileName}`);
                 return sourceCode.toString();
             }
             catch (err) {
@@ -75,7 +75,7 @@ class FileService {
         });
         this.getProblemDescription = (problemName) => __awaiter(this, void 0, void 0, function* () {
             try {
-                const data = yield fs_1.promises.readFile(`../problems/problems-structure/${problemName}.md`, "utf-8");
+                const data = yield fs_1.promises.readFile(`/app/problems/problems-structure/${problemName}.md`, "utf-8");
                 console.log("data", data);
                 return data;
             }
@@ -87,7 +87,7 @@ class FileService {
             try {
                 //  console.log("language ",language);
                 const extension = (0, commonUtils_1.returnExtension)(language);
-                const data = yield fs_1.promises.readFile(`../problems/problems-boilerplate/${problemName}.${extension}`, "utf-8");
+                const data = yield fs_1.promises.readFile(`/app/problems/problems-boilerplate/${problemName}.${extension}`, "utf-8");
                 // console.log("data",data);
                 return data;
             }
