@@ -18,14 +18,33 @@ export default function Problem() {
   const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async () => {
-    setLoading(true); // Start loading
+   // Start loading
     try {
-      console.log("Submitting Code:");
-      console.log("Language:", language);
-      console.log("Code:", code);
+      // console.log("Submitting Code:");
+      // console.log("Language:", language);
+      // console.log("Code:", code);
       const data = await submitCode(slug, language, code);
-      console.log("data", data);
-      setResults(data.result || []);
+      setLoading(true); 
+     // console.log("request id", data.requestId);
+      const requestId=data.requestId;
+      const pollInterval = setInterval(async () => {
+        const pollRes = await fetch(`http://localhost:3000/api/v1/code/request/${requestId}`,{
+          method:"GET"
+        });
+        const pollData = await pollRes.json();
+    
+        if (pollData.status=="done") { 
+          //console.log("Code execution result:", pollData.result);
+          setResults(pollData.result);
+          clearInterval(pollInterval);
+          setLoading(false);
+        }
+        else
+        {
+          setLoading(true)
+        }
+      }, 2000);
+      
     } catch (error) {
       console.error("Error submitting code:", error);
     } finally {

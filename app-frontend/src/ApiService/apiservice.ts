@@ -73,7 +73,7 @@ const submitCode=async (problemName:string,language:string,sourceCode:string)=>{
     try{
        // console.log("here");
         
-        const response=await fetch("http://localhost:3000/api/v1/code/execute",{
+        const response=await fetch("http://localhost:3000/api/v1/code/queuecode",{
             method:"POST",
             headers:{
 'content-type':"application/json",
@@ -88,7 +88,7 @@ const submitCode=async (problemName:string,language:string,sourceCode:string)=>{
             
         });
         const data=await response.json();
-       // console.log("boiler plate code ",data);
+        //console.log("result ",data);
         
        return data;
         
